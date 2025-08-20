@@ -13,6 +13,7 @@
   "dependencies": {
     "@clerk/clerk-expo": "^2.1.0",
     "@expo/vector-icons": "^14.1.0",
+    "@gorhom/bottom-sheet": "^5.2.3",
     "@neondatabase/serverless": "^0.9.4",
     "@react-navigation/bottom-tabs": "^7.3.10",
     "@react-navigation/elements": "^2.3.8",
@@ -37,7 +38,7 @@
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-native": "0.79.5",
-    "react-native-gesture-handler": "~2.24.0",
+    "react-native-gesture-handler": "^2.16.1",
     "react-native-google-places-autocomplete": "^2.5.6",
     "react-native-maps": "^1.14.0",
     "react-native-maps-directions": "^1.9.0",
