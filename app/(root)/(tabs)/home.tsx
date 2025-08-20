@@ -1,9 +1,12 @@
 import GoogleTextInput from "@/components/GoogleTextInput";
 import Map from "@/components/Map";
+import * as Location from "expo-location";
 import RideCard from "@/components/RideCard";
 import { icons, images } from "@/constants";
+import { useLocationStore } from "@/store";
 import { SignedIn, SignedOut, useUser } from "@clerk/clerk-expo";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
+import { useEffect, useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
@@ -122,11 +125,53 @@ const recentRids = [
 ];
 
 export default function Page() {
+  const { setUserLocation, setDestinationLocation } = useLocationStore();
   const { user } = useUser();
   const loading = true;
 
+  const [hasPermissions, setHasPermissions] = useState(false);
+
   const handleSignOut = () => {};
-  const handleDestinationPress = () => {};
+  const handleDestinationPress = (location :{
+    latitude: number, 
+  longitude: number; 
+    address: string 
+  }) =>  {
+   setDestinationLocation(location);
+   
+
+
+   router.push("/(root)/find-ride")
+  };
+
+  useEffect(() => {
+    const requestLocation = async () => {
+      //Cihazın (expo) konum bilgisi alınıyor
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      //granted ise izin verilmiş
+      if (status !== "granted") {
+        setHasPermissions(false);
+        return;
+      }
+      // Cihazın o anki konumunu
+      let location = await Location.getCurrentPositionAsync();
+
+      const address = await Location.reverseGeocodeAsync({
+        latitude: location.coords?.latitude!,
+        longitude: location.coords?.longitude!,
+      });
+
+      setUserLocation({
+        latitude: 40.2146237,
+        longitude: 28.922387,
+        // latitude: location.coords.latitude,
+        // longitude: location.coords.longitude,
+        address: `${address[0].name}, ${address[0].region}`,
+      });
+    };
+
+    requestLocation();
+  }, []);
 
   return (
     <SafeAreaView className="bg-general-500">
@@ -186,14 +231,10 @@ export default function Page() {
                 <Map />
               </View>
             </>
-         
 
-         <Text className="text-xl font-JakartaBold mt-5 mb-3">
+            <Text className="text-xl font-JakartaBold mt-5 mb-3">
               Recent Rides
-              </Text>
-
-
-
+            </Text>
           </>
         )}
       />
