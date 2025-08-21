@@ -114,7 +114,7 @@ const Payment = ({
           }
         },
       },
-      returnURL: "myapp://book-ride",
+      returnURL: "uberclonemobile://book-ride",
     });
 
     if (!error) {

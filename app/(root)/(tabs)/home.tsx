@@ -160,10 +160,10 @@ export default function Page() {
       });
 
       setUserLocation({
-        latitude: 40.2146237,
-        longitude: 28.922387,
-        // latitude: location.coords.latitude,
-        // longitude: location.coords.longitude,
+        // latitude: 40.2146237,
+        // longitude: 28.922387,
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
         address: `${address[0].name}, ${address[0].region}`,
       });
     };
