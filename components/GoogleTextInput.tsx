@@ -75,24 +75,29 @@ const GoogleTextInput = ({
         }}
       minLength={2}
   keepResultsAfterBlur={true}
-      // autoFillOnNotFound={false}
-      // currentLocation={false}
-      // currentLocationLabel="Mevcut konum"
-      // disableScroll={false}
+      timeout={20000}
+    // GooglePlacesDetailsQuery={{}}
+    //   autoFillOnNotFound={true}
+    //   currentLocation={true}
+    //    enableHighAccuracyLocation={true}
+    //   enablePoweredByContainer={true}
+    //   filterReverseGeocodingByTypes={[]}
+    //   GoogleReverseGeocodingQuery={{}}
+    //    predefinedPlacesAlwaysVisible={true}
+    //        numberOfLines={1}
+    //    currentLocationLabel="Mevcut konum"
+    //    disableScroll={true}
       // enableHighAccuracyLocation={true}
       // enablePoweredByContainer={true}
       // filterReverseGeocodingByTypes={[]}
-      // GooglePlacesDetailsQuery={{}}
       // GoogleReverseGeocodingQuery={{}}
       // isRowScrollable={true}
-      // keepResultsAfterBlur={false}
       // listUnderlayColor="#c8c7cc"
       // listViewDisplayed="auto"
       // nearbyPlacesAPI="GooglePlacesSearch"
       // numberOfLines={1}
-      // predefinedPlacesAlwaysVisible={false}
-      // returnKeyType="search"
-      // timeout={20000}
+
+  
 
     />
   </View>

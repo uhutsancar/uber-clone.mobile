@@ -12,10 +12,12 @@ const RideLayout = ({
   title,
   children,
   snapPoints,
+  index,
 }: {
   title: string;
   children: React.ReactNode;
   snapPoints?: string[];
+  index?: number;
 }) => {
   const BottomSheetRef = useRef<BottomSheet>(null);
 
@@ -43,8 +45,8 @@ const RideLayout = ({
         <BottomSheet
           // keyboardBehavior="extend"
           ref={BottomSheetRef}
-          snapPoints={snapPoints || ["40%", "85%"]}
-          index={0}
+          snapPoints={snapPoints || ["40%", "70%"]}
+          index={index || 0}
         >
           <BottomSheetView style={{ flex: 1, padding: 20 }}>
             {children}

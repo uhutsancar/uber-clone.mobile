@@ -13,6 +13,7 @@ const drivers = [
     id: "1",
     first_name: "James",
     last_name: "Wilson",
+    time: 25,
     profile_image_url:
       "https://ucarecdn.com/dae59f69-2c1f-48c3-a883-017bcf0f9950/-/preview/1000x666/",
     car_image_url:
@@ -24,12 +25,14 @@ const drivers = [
     id: "2",
     first_name: "David",
     last_name: "Brown",
+        time: 15,
     profile_image_url:
       "https://ucarecdn.com/6ea6d83d-ef1a-483f-9106-837a3a5b3f67/-/preview/1000x666/",
     car_image_url:
       "https://ucarecdn.com/a3872f80-c094-409c-82f8-c9ff38429327/-/preview/930x932/",
     car_seats: 5,
     rating: "4.60",
+    price: 60
   },
   {
     id: "3",
@@ -40,7 +43,9 @@ const drivers = [
     car_image_url:
       "https://ucarecdn.com/289764fb-55b6-4427-b1d1-f655987b4a14/-/preview/930x932/",
     car_seats: 4,
+        time: 5,
     rating: "4.70",
+        price: 40
   },
   {
     id: "4",
@@ -52,37 +57,51 @@ const drivers = [
       "https://ucarecdn.com/b6fb3b55-7676-4ff3-8484-fb115e268d32/-/preview/930x932/",
     car_seats: 4,
     rating: "4.90",
+        price: 125
   },
 ];
 
 const Map = () => {
-  const { userLongitude, userLatitude } = useLocationStore();
-  const { selectedDriver } = useDriverStore();
+  const {
+    userLongitude,
+    userLatitude,
+    destinationLatitude,
+    destinationLongitude,
+  } = useLocationStore();
+
+  const { selectedDriver, setDrivers } = useDriverStore();
 
   const [markers, setMarkers] = useState<MarkerData[]>([]);
-
-  useEffect(() => {
-    if (!userLatitude || !userLongitude) return;
-
-    const newMarkers = generateMarkersFromData({
-      data: drivers,
-      userLatitude,
-      userLongitude,
-    });
-
-    setMarkers(newMarkers);
-  }, [userLatitude, userLongitude]);
 
   const region = calculateRegion({
     userLatitude,
     userLongitude,
+    destinationLatitude,
+    destinationLongitude,
   });
+
+  useEffect(() => {
+    //TODO: Remove
+    setDrivers(drivers);
+
+    if (Array.isArray(drivers)) {
+      if (!userLatitude || !userLongitude) return;
+
+      const newMarkers = generateMarkersFromData({
+        data: drivers,
+        userLatitude,
+        userLongitude,
+      });
+
+      setMarkers(newMarkers);
+    }
+  }, [drivers]);
 
   return (
     <MapView
       provider={PROVIDER_DEFAULT}
       className="w-full h-full rounded-2xl"
-     mapType={Platform.OS === 'android' ? 'standard' : 'mutedStandard'}
+      mapType={Platform.OS === "android" ? "standard" : "mutedStandard"}
       showsPointsOfInterest={false}
       initialRegion={region}
       showsUserLocation={true}
