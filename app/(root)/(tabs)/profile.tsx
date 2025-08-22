@@ -21,7 +21,7 @@ const Profile = () => {
               uri: user?.externalAccounts[0]?.imageUrl ?? user?.imageUrl,
             }}
             style={{ width: 110, height: 110, borderRadius: 110 / 2 }}
-            className=" rounded-full h-[110px] w-[110px] border-[3px] border-white shadow-sm shadow-neutral-300"
+            className="rounded-full h-[110px] w-[110px] border-[3px] border-white shadow-sm shadow-neutral-300"
           />
         </View>
 
@@ -30,16 +30,18 @@ const Profile = () => {
             <InputField
               label="First name"
               placeholder={user?.firstName || "Not Found"}
+              placeholderTextColor="#1F2937"
               containerStyle="w-full"
-              inputStyle="p-3.5"
+              inputStyle="p-3.5 text-base font-JakartaBold text-gray-900"
               editable={false}
             />
 
             <InputField
               label="Last name"
               placeholder={user?.lastName || "Not Found"}
+              placeholderTextColor="#1F2937"
               containerStyle="w-full"
-              inputStyle="p-3.5"
+              inputStyle="p-3.5 text-base font-JakartaBold text-gray-900"
               editable={false}
             />
 
@@ -48,16 +50,18 @@ const Profile = () => {
               placeholder={
                 user?.primaryEmailAddress?.emailAddress || "Not Found"
               }
+              placeholderTextColor="#1F2937"
               containerStyle="w-full"
-              inputStyle="p-3.5"
+              inputStyle="p-3.5 text-base font-JakartaBold text-gray-900"
               editable={false}
             />
 
             <InputField
               label="Phone"
               placeholder={user?.primaryPhoneNumber?.phoneNumber || "Not Found"}
+              placeholderTextColor="#1F2937"
               containerStyle="w-full"
-              inputStyle="p-3.5"
+              inputStyle="p-3.5 text-base font-JakartaBold text-gray-900"
               editable={false}
             />
           </View>

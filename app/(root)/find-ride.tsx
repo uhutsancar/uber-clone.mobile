@@ -10,7 +10,7 @@ const FindRide = () => {
   const {
     userAddress,
     destinationAddress,
-    setDestinationAddress,
+    setDestinationLocation,
     setUserLocation,
   } = useLocationStore();
   return (
@@ -32,7 +32,7 @@ const FindRide = () => {
           initialLocation={destinationAddress!}
           containerStyle="bg-neutral-100"
           textInputBackgroundColor="transparent"
-          handlePress={(location) => setDestinationAddress(location)}
+          handlePress={(location) => setDestinationLocation(location)}
         />
       </View>
 
