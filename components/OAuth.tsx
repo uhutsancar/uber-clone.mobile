@@ -1,6 +1,7 @@
-import { useOAuth } from "@clerk/clerk-expo";
+import { useOAuth, useAuth } from "@clerk/clerk-expo";
 import { router } from "expo-router";
 import { Alert, Image, Text, View } from "react-native";
+import { useEffect } from "react";
 
 import CustomButton from "@/components/CustomButton";
 import { icons } from "@/constants";
@@ -8,16 +9,29 @@ import { googleOAuth } from "@/lib/auth";
 
 const OAuth = () => {
   const { startOAuthFlow } = useOAuth({ strategy: "oauth_google" });
+  const { isSignedIn } = useAuth(); // Clerk session state
+
+  // 🔑 Eğer kullanıcı giriş yaptıysa otomatik olarak home’a yönlendir
+  useEffect(() => {
+    if (isSignedIn) {
+      router.replace("/(root)/(tabs)/home");
+    }
+  }, [isSignedIn]);
 
   const handleGoogleSignIn = async () => {
     const result = await googleOAuth(startOAuthFlow);
 
-    if (result.code === "session_exists") {
-      Alert.alert("Success", "Session exists. Redirecting to home screen.");
-      router.replace("/(root)/(tabs)/home");
+    if (result.success) {
+      Alert.alert("Success", "Login successful! Redirecting...");
+      return; // yönlendirme useEffect ile yapılacak
     }
 
-    Alert.alert(result.success ? "Success" : "Error", result.message);
+    if (result.code === "session_exists") {
+      Alert.alert("Success", "Session exists. Redirecting...");
+      return; // yönlendirme yine useEffect ile yapılacak
+    }
+
+    Alert.alert("Error", result.message);
   };
 
   return (
